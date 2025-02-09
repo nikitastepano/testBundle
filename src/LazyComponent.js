@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { View, Text, Button, ActivityIndicator, ScrollView } from 'react-native';
 
 function LazyComponent() {
     const [count, setCount] = useState(0);
@@ -60,29 +61,29 @@ function LazyComponent() {
     };
 
     const renderedData = loading ? (
-        <div>Loading...</div>
+        <ActivityIndicator size="large" color="#0000ff" />
     ) : (
-        <div>
+        <ScrollView>
             {processData().map(item => (
-                <div key={item.id}>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                    <small>{item.formattedDate}</small>
-                </div>
+                <View key={item.id} style={{ padding: 10 }}>
+                    <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
+                    <Text>{item.description}</Text>
+                    <Text>{item.formattedDate}</Text>
+                </View>
             ))}
-        </div>
+        </ScrollView>
     );
 
     return (
-        <div>
-            <h1>Lazy Component</h1>
-            <button onClick={handleClick}>Click me</button>
+        <View style={{ flex: 1, padding: 20 }}>
+            <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Lazy Component</Text>
+            <Button title="Click me" onPress={handleClick} />
             {renderedData}
-            <div>
-                <p>Count: {count}</p>
-                <button onClick={() => setCount(count + 1)}>Increment Count</button>
-            </div>
-        </div>
+            <View style={{ marginTop: 20 }}>
+                <Text>Count: {count}</Text>
+                <Button title="Increment Count" onPress={() => setCount(count + 1)} />
+            </View>
+        </View>
     );
 }
 

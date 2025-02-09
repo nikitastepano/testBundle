@@ -13,6 +13,12 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
   },
+  resolve: {
+    alias: {
+      'react-native$': 'react-native-web',
+    },
+    extensions: ['.web.js', '.js', '.json', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -33,9 +39,6 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
     },
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
   },
   mode: 'development',
 };
